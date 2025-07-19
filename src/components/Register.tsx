@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import React, { useState } from "react";
+import { TextField, Button, Box, Typography } from "@mui/material";
+import useSignin from "../hooks/useSignin";
 
 export const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
+
+  const { signIn } = useSignin();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -24,8 +27,7 @@ export const Register = () => {
       return;
     }
 
-    console.log('Email:', email);
-    console.log('Password:', password);
+    signIn(email, password);
   };
 
   return (
@@ -33,12 +35,12 @@ export const Register = () => {
       component="form"
       onSubmit={handleSubmit}
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         gap: 2,
         maxWidth: 400,
-        margin: '0 auto',
+        margin: "0 auto",
         mt: 5,
       }}
     >
@@ -51,7 +53,7 @@ export const Register = () => {
         value={email}
         onChange={handleEmailChange}
         error={emailError}
-        helperText={emailError ? 'Please enter a valid email address' : ''}
+        helperText={emailError ? "Please enter a valid email address" : ""}
         fullWidth
         required
       />
@@ -68,5 +70,5 @@ export const Register = () => {
       </Button>
     </Box>
   );
-}
+};
 export default Register;
